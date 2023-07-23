@@ -10,6 +10,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./index.css";
+import flights_data from "../../flights_data.json";
 
 const SearchFlight = (props) => {
   const [selectedOriginInput, setSelectedOriginInput] = useState("");
@@ -22,8 +23,15 @@ const SearchFlight = (props) => {
 
   const getFlights = async () => {
     try {
-      const result = await fetch("http://localhost:3000/AvailableFlights");
-      const flights = await result.json();
+      // We can run the local JSON server and can make API calls to it. But when we are hosting on a server
+      // it is not posible to run the json server on Hosting server.
+      // For the Hosting services i'm commenting below.So uncomment below when we are running locally by running a JSON server.
+      // const result = await fetch("http://localhost:3000/AvailableFlights");
+      // const flights = await result.json();
+
+      const flights = flights_data.AvailableFlights;
+      // comment above when running local JSON server
+
       setAllFlightsData(flights);
       let uniqueOriginStations = [];
       flights.forEach((each) => {
@@ -37,7 +45,7 @@ const SearchFlight = (props) => {
       );
       setOriginStationsList(uniqueOriginStations);
     } catch (error) {
-      window.alert(error);
+      console.log(error);
     }
   };
   useEffect(() => {
