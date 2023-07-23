@@ -50,9 +50,6 @@ const SearchFlight = (props) => {
   };
   useEffect(() => {
     getFlights();
-    window.alert(
-      "Please find the json file for testing the ui with different combinations!"
-    );
   }, []);
 
   const onChangeFromFlight = (event, selObject) => {
